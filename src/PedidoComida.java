@@ -2,20 +2,20 @@
 
 public class PedidoComida extends Pedido{
 
-    public PedidoComida(int idPedido, String direccionEntrega){
-        // llamamos al constructor padre
-        super(idPedido, direccionEntrega, "Comida");
+    // El constructor ahora debe recibir e inicializar la distancia
+    public PedidoComida(String idPedido, String direccionEntrega, double distanciaKm){
+        super(idPedido, direccionEntrega, distanciaKm);
     }
 
+    // Implementación obligatoria del método abstracto
+    @Override
+    public int calcularTiempoEntrega(){
+        // Fórmula: 15 min + 2 min por cada kilómetro
+        return (int)(15 + (2 * distanciaKm));
+    }
     @Override
     public void asignarRepartidor(){
-        System.out.println("Asignando repartidor para COMIDA...");
-        System.out.println(" Verificando mochila térmica");
-        System.out.println("Asignando repartidor con equipamiento.");
+        System.out.println("Asignando repartidor para cada COMIDA con mochila térmica");
     }
-    // metodo sobrecargado
-    public void asignarRepartidor(String nombreRepartidor){
-        asignarRepartidor(); // llamamos al metodo original
-        System.out.println(" Pedido asignado a " + nombreRepartidor);
-    }
+
 }

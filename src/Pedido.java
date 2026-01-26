@@ -1,27 +1,29 @@
-public class Pedido {
-    // Atributos privados
-    private int idPedido;
-    private String direccionEntrega;
-    private String tipoPedido;
+public abstract class Pedido {
 
-    // Constructor completo
-    public Pedido(int idPedido, String direccionEntrega, String tipoPedido){
+    // Atributos protegidos para que las subclases puedan acceder a ellos
+
+    protected String idPedido;
+    protected String direccionEntrega;
+    protected double distanciaKm;
+
+    public Pedido(String idPedido, String direccionEntrega, double distanciaKm){
         this.idPedido = idPedido;
         this.direccionEntrega = direccionEntrega;
-        this.tipoPedido = tipoPedido;
+        this.distanciaKm = distanciaKm;
     }
 
-    // Getters y Setters
-    public int getIdPedido() {return idPedido;}
-    public void setIdPedido(int idPedido){this.idPedido = idPedido;}
+    // Método implementado: común para todos los pedidos
 
-    public String getDireccionEntrega(){return direccionEntrega;}
-    public void setDireccionEntrega(String direccionEntrega){this.direccionEntrega = direccionEntrega;}
+    public void mostrarResumen(){
+        System.out.println("Id Pedido: " + idPedido);
+        System.out.println("Dirección de Entrega: " + direccionEntrega);
+        System.out.println("Distancia (km): " + distanciaKm);
+    }
 
-    public String getTipoPedido(){return tipoPedido;}
-    public void setTipoPedido(String tipoPedido){this.tipoPedido = tipoPedido;}
+    // Método abstracto: cada subclase DEBE implementar su propia logíca
+    public abstract int calcularTiempoEntrega();
 
     public void asignarRepartidor(){
-        System.out.println("Asignando repartidor para recoger el pedido...");
+        System.out.println("buscando repartidor disponible para el pedido " + idPedido + " ...");
     }
 }
