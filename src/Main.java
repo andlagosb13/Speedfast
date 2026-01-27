@@ -1,29 +1,45 @@
-public class Main {
-    public static void main(String[]args){
-        // Instanciamos objetos de las clases derivadas
-        PedidoComida pedidoComida = new PedidoComida("#001", "Uno Poniente 285 ",3.5);
-        PedidoEncomienda pedidoEncomienda = new PedidoEncomienda("#002","Cinco norte 435",7.0);
-        PedidoExpress pedidoExpress = new PedidoExpress("#003","Tres sur 25",6.0);
+import java.util.ArrayList;
 
-        // Ejecución y muestra de datos
-        System.out.println("---- PRUEBA DE PEDIDOS SPEEDFAST ----\n");
+public class Main implements Rastreable {
+    public static ArrayList<String> historial = new ArrayList<>();
 
-        // Bloque Pedido Comida
-        pedidoComida.mostrarResumen(); // Método heredado
-        System.out.println("Tiempo estimado de entrega: " + pedidoComida.calcularTiempoEntrega() + " minutos");
-        pedidoComida.asignarRepartidor();
+    public static void main(String[] args) {
+        Main sistema = new Main();
 
-        System.out.println(); // Salto de linea para claridad
+        // Instancias de pedidos
+        PedidoComida p1 = new PedidoComida("#001", "Calle cuatro 115", 3.0);
+        PedidoEncomienda p2 = new PedidoEncomienda("#002", "Avenida cerroalto 2145", 7.5);
+        PedidoExpress p3 = new PedidoExpress("#003", "Boulevard central 500", 2.0);
 
-        // Probamos pedido de encomienda
-        pedidoEncomienda.mostrarResumen();
-        System.out.println("Tiempo estimado de entrega: " + pedidoEncomienda.calcularTiempoEntrega() + " minutos");
-        pedidoEncomienda.asignarRepartidor();
-        System.out.println();
+        // simulacion Pedido 1
+        System.out.println("[Procesando Pedido de Comida]");
+        p1.mostrarResumen();
+        p1.asignarRepartidor("Alberto");
+        System.out.println("Tiempo: " + p1.calcularTiempoEntrega() + " minutos");
+        p1.despachar();
+        historial.add("PedidoComida #001 - entregado por Alberto");
 
-        // Probamos pedido express
-       pedidoExpress.mostrarResumen();
-       System.out.println("Tiempo estimado de entrega: " + pedidoExpress.calcularTiempoEntrega() + " minutos");
-       pedidoExpress.asignarRepartidor();
+        // Simulacion pedido 2
+        System.out.println("\n[Procesando Pedido de Encomienda]");
+        p2.mostrarResumen();
+        p2.asignarRepartidor("Beatriz");
+        System.out.println("Tiempo: " + p2.calcularTiempoEntrega() + " minutos");
+        p2.despachar();
+        historial.add("PedidoEncomienda #002 - entregado por Beatriz");
+
+        // Simulación cancelación
+        System.out.println("\nCancelando Pedido Express " + p3.idPedido + " ....");
+        p3.cancelar();
+
+        // Mostrar historial
+        sistema.verHistorial();
+    }
+
+    @Override
+    public void verHistorial() {
+        System.out.println("\n[Historial de Pedidos]");
+        for (String registro : historial) {
+            System.out.println("-  " + registro);
+        }
     }
 }

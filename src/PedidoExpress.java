@@ -1,4 +1,4 @@
-public class PedidoExpress extends Pedido{
+public class PedidoExpress extends Pedido implements Despachable, Cancelable {
 
     public PedidoExpress(String idPedido, String direccionEntrega, double distanciaKm){
         super(idPedido, direccionEntrega, distanciaKm);
@@ -26,5 +26,14 @@ public class PedidoExpress extends Pedido{
         this.asignarRepartidor();
         // agregamos la asignación específica
         System.out.println("Pedido asignado a " + nombreRepartidor);
+    }
+    @Override
+    public void despachar(){
+        System.out.println("El pedido express está en camino con máxima prioridad.");
+    }
+
+    @Override
+    public void cancelar(){
+        System.out.println(" Pedido cancelado exitosamente.");
     }
 }

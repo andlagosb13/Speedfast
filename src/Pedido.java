@@ -1,7 +1,6 @@
 public abstract class Pedido {
 
     // Atributos protegidos para que las subclases puedan acceder a ellos
-
     protected String idPedido;
     protected String direccionEntrega;
     protected double distanciaKm;
@@ -22,8 +21,9 @@ public abstract class Pedido {
 
     // Método abstracto: cada subclase DEBE implementar su propia logíca
     public abstract int calcularTiempoEntrega();
+    public abstract void asignarRepartidor();
 
-    public void asignarRepartidor(){
-        System.out.println("buscando repartidor disponible para el pedido " + idPedido + " ...");
-    }
+    // Método sobrecargado solicitado
+    public abstract void asignarRepartidor(String nombre);
+
 }

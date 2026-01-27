@@ -1,6 +1,6 @@
 
 
-public class PedidoEncomienda extends Pedido{
+public class PedidoEncomienda extends Pedido implements Despachable{
 
     public PedidoEncomienda(String idPedido, String direccionEntrega, double distanciaKm){
         // ahora pasamos distanciaKm al constructor padre
@@ -23,5 +23,9 @@ public class PedidoEncomienda extends Pedido{
     public void asignarRepartidor(String nombreRepartidor){
         this.asignarRepartidor();
         System.out.println("Pedido de encomienda asignado a " + nombreRepartidor);
+    }
+    @Override
+    public void despachar(){
+        System.out.println("Pedido despachado correctamente.");
     }
 }
