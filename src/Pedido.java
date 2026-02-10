@@ -1,29 +1,29 @@
-public abstract class Pedido {
+
+
+public class Pedido {
 
     // Atributos protegidos para que las subclases puedan acceder a ellos
-    protected String idPedido;
-    protected String direccionEntrega;
-    protected double distanciaKm;
+    private int id;
+    private String direccionEntrega;
+    private EstadoPedido estado;
 
-    public Pedido(String idPedido, String direccionEntrega, double distanciaKm){
-        this.idPedido = idPedido;
+    public Pedido(int id, String direccionEntrega){
+        this.id = id;
         this.direccionEntrega = direccionEntrega;
-        this.distanciaKm = distanciaKm;
+        this.estado = EstadoPedido.PENDIENTE; // Estado inicial
     }
 
-    // Método implementado: común para todos los pedidos
+    // Gettesr y setters
+    public int getId() {return id;}
+    public String getDireccionEntrega() { return direccionEntrega;}
+    public EstadoPedido getEstado(){return estado;}
 
-    public void mostrarResumen(){
-        System.out.println("Id Pedido: " + idPedido);
-        System.out.println("Dirección de Entrega: " + direccionEntrega);
-        System.out.println("Distancia (km): " + distanciaKm);
+    public void setEstado(EstadoPedido nuevoEstado){
+        this.estado = nuevoEstado;
     }
 
-    // Método abstracto: cada subclase DEBE implementar su propia logíca
-    public abstract int calcularTiempoEntrega();
-    public abstract void asignarRepartidor();
-
-    // Método sobrecargado solicitado
-    public abstract void asignarRepartidor(String nombre);
-
+    @Override
+    public String toString(){
+        return "Pedido #" + id + " [Destino: " + direccionEntrega + ", Estado: " + estado + "]";
+    }
 }

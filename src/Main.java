@@ -1,45 +1,34 @@
-import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
-public class Main implements Rastreable {
-    public static ArrayList<String> historial = new ArrayList<>();
-
+public class Main {
     public static void main(String[] args) {
-        Main sistema = new Main();
+        ZonaDeCarga zona = new ZonaDeCarga();
+        System.out.println("[Zona de carga inicializada]");
 
-        // Instancias de pedidos
-        PedidoComida p1 = new PedidoComida("#001", "Calle cuatro 115", 3.0);
-        PedidoEncomienda p2 = new PedidoEncomienda("#002", "Avenida cerroalto 2145", 7.5);
-        PedidoExpress p3 = new PedidoExpress("#003", "Boulevard central 500", 2.0);
+        // Agregar al menos 5 pedidos [cite: 106]
+        zona.agregarPedido(new Pedido(1, "Santiago Centro"));
+        zona.agregarPedido(new Pedido(2, "Providencia"));
+        zona.agregarPedido(new Pedido(3, "Ñuñoa"));
+        zona.agregarPedido(new Pedido(4, "Recoleta"));
+        zona.agregarPedido(new Pedido(5, "Las Condes"));
 
-        // simulacion Pedido 1
-        System.out.println("[Procesando Pedido de Comida]");
-        p1.mostrarResumen();
-        p1.asignarRepartidor("Alberto");
-        System.out.println("Tiempo: " + p1.calcularTiempoEntrega() + " minutos");
-        p1.despachar();
-        historial.add("PedidoComida #001 - entregado por Alberto");
+        // Crear 3 repartidores [cite: 107]
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+        executor.execute(new Repartidor("Juan", zona));
+        executor.execute(new Repartidor("Camila", zona));
+        executor.execute(new Repartidor("Pedro", zona));
 
-        // Simulacion pedido 2
-        System.out.println("\n[Procesando Pedido de Encomienda]");
-        p2.mostrarResumen();
-        p2.asignarRepartidor("Beatriz");
-        System.out.println("Tiempo: " + p2.calcularTiempoEntrega() + " minutos");
-        p2.despachar();
-        historial.add("PedidoEncomienda #002 - entregado por Beatriz");
-
-        // Simulación cancelación
-        System.out.println("\nCancelando Pedido Express " + p3.idPedido + " ....");
-        p3.cancelar();
-
-        // Mostrar historial
-        sistema.verHistorial();
-    }
-
-    @Override
-    public void verHistorial() {
-        System.out.println("\n[Historial de Pedidos]");
-        for (String registro : historial) {
-            System.out.println("-  " + registro);
+        executor.shutdown();
+        try {
+            // Esperar a que todos terminen [cite: 109]
+            if (executor.awaitTermination(1, TimeUnit.MINUTES)) {
+                System.out.println("\n[Zona de carga vacía]");
+                System.out.println("Todos los pedidos han sido entregados correctamente.");
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
