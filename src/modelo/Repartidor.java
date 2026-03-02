@@ -1,3 +1,4 @@
+package modelo;
 
 public class Repartidor implements Runnable{
 
@@ -7,6 +8,11 @@ public class Repartidor implements Runnable{
     public Repartidor(String nombre, ZonaDeCarga zonaDeCarga){
         this.nombre = nombre;
         this.zonaDeCarga = zonaDeCarga;
+    }
+
+    // metodo Getter para obtener nombre
+    public String getNombre(){
+        return nombre;
     }
 
     @Override
@@ -19,16 +25,16 @@ public class Repartidor implements Runnable{
             try{
                 // Cambio de estado a EN_REPARTO
                 pedido.setEstado(EstadoPedido.EN_REPARTO);
-                System.out.println("[Repartidor: " + nombre + "] Retirando pedido#" + pedido.getId() + "...");
-                System.out.println("[Repartidor: " + nombre + "] Estado: " + pedido.getEstado());
+                System.out.println("[modelo.Repartidor: " + nombre + "] Retirando pedido#" + pedido.getId() + "...");
+                System.out.println("[modelo.Repartidor: " + nombre + "] Estado: " + pedido.getEstado());
 
                 // Simular entrega
                 Thread.sleep(2000);
 
                 // Cambio de estado a ENTREGADO
                 pedido.setEstado(EstadoPedido.ENTREGADO);
-                System.out.println("[Repartidor - " + nombre + "] Entregando pedido#" + pedido.getId() + "...");
-                System.out.println("[Repartidor: " + nombre + "] Estado: " + pedido.getEstado());
+                System.out.println("[modelo.Repartidor - " + nombre + "] Entregando pedido#" + pedido.getId() + "...");
+                System.out.println("[modelo.Repartidor: " + nombre + "] Estado: " + pedido.getEstado());
 
             }catch (InterruptedException e){
                 Thread.currentThread().interrupt();

@@ -1,3 +1,5 @@
+package modelo;
+
 public class PedidoExpress extends Pedido implements Despachable, Cancelable {
 
     public PedidoExpress(int id, String direccionEntrega, double distanciaKm){
@@ -11,6 +13,6 @@ public class PedidoExpress extends Pedido implements Despachable, Cancelable {
 
     @Override
     public void cancelar(){
-        System.out.println(" Pedido cancelado exitosamente.");
+        System.out.println(" modelo.Pedido cancelado exitosamente.");
     }
 }

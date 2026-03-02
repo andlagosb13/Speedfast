@@ -1,3 +1,5 @@
+package modelo;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -8,7 +10,7 @@ public class ZonaDeCarga {
     // Método sincronizado para agregar
     public synchronized void agregarPedido(Pedido p){
         pedidos.add(p);
-        System.out.println("Pedido #" + p.getId() + " agregado. Destino: " + p.getDireccionEntrega());
+        System.out.println("modelo.Pedido #" + p.getId() + " agregado. Destino: " + p.getDireccionEntrega());
     }
 
     // Método sincronizado para procesar entregas

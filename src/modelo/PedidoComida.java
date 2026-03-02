@@ -1,6 +1,6 @@
+package modelo;
 
-
-public class PedidoComida extends Pedido implements Despachable{
+public class PedidoComida extends Pedido implements Despachable {
 
     // El constructor ahora debe recibir e inicializar la distancia
     public PedidoComida(int idPedido, String direccionEntrega, double distanciaKm){

@@ -1,6 +1,6 @@
+package modelo;
 
-
-public class PedidoEncomienda extends Pedido implements Despachable{
+public class PedidoEncomienda extends Pedido implements Despachable {
 
     public PedidoEncomienda(int idPedido, String direccionEntrega, double distanciaKm){
         // ahora pasamos distanciaKm al constructor padre
@@ -9,6 +9,6 @@ public class PedidoEncomienda extends Pedido implements Despachable{
 
     @Override
     public void despachar(){
-        System.out.println("Pedido despachado correctamente.");
+        System.out.println("modelo.Pedido despachado correctamente.");
     }
 }

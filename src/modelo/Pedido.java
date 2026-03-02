@@ -1,4 +1,4 @@
-
+package modelo;
 
 public class Pedido {
 
@@ -24,6 +24,6 @@ public class Pedido {
 
     @Override
     public String toString(){
-        return "Pedido #" + id + " [Destino: " + direccionEntrega + ", Estado: " + estado + "]";
+        return "modelo.Pedido #" + id + " [Destino: " + direccionEntrega + ", Estado: " + estado + "]";
     }
 }
